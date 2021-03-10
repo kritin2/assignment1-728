@@ -4,7 +4,7 @@ from nltk.tokenize import word_tokenize
 import re
 import nltk
 nltk.download('punkt')
-
+nltk.download('stopwords')
 class PrepositionClass:
     def __init__(self, senseId, id, prepositionValue, leftContext, rightContext):
         self.senseId = senseId
@@ -17,18 +17,18 @@ class PrepositionClass:
         print('id : ', self.id)
         print('senseId : ',self.senseId)
         print(self.leftContext + "\n" + self.prepositionValue + "\n" + self.rightContext )
-
+        print(self.leftContextList , self.prepositionValue , self.rightContextList )
     
     def tokenizeSentence(self):
         leftContextTemp = self.leftContext.lower()
         leftContextTemp = re.sub(r'[^\w\s]', '', leftContextTemp)
         leftContextToken = word_tokenize(leftContextTemp)
-        self.leftContext = [word for word in leftContextToken if not word in stopwords.words()]
+        self.leftContextList = [word for word in leftContextToken if not word in stopwords.words()]
 
         rightContextTemp = self.rightContext.lower()
         rightContextTemp = re.sub(r'[^\w\s]', '', rightContextTemp)
         rightContextToken = word_tokenize(rightContextTemp)
-        self.rightContext = [word for word in rightContextToken if not word in stopwords.words()]    
+        self.rightContextList = [word for word in rightContextToken if not word in stopwords.words()]    
         
 
 if __name__ == '__main__' :
